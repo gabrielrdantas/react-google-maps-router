@@ -8,7 +8,7 @@ export default class GoogleMapsComponent extends React.Component {
     directionsDisplay;
 
     componentDidMount() {
-        scriptjs('https:/maps.googleapis.com/maps/api/js?key=AIzaSyCRoz4R2eFrko_kqw0IaMy9uviycl4-BuI&sensor=false',
+        scriptjs('https:/maps.googleapis.com/maps/api/js?key=YOUR_KEY&sensor=false',
         () => {
             this.createMap();
             this.calculateRoute();
