@@ -11,8 +11,12 @@ export default class GoogleMapsComponent extends React.Component {
         scriptjs('https:/maps.googleapis.com/maps/api/js?key=AIzaSyCRoz4R2eFrko_kqw0IaMy9uviycl4-BuI&sensor=false',
         () => {
             this.createMap();
-            this.createPanel();
-            this.calculateRoute(); 
+            this.calculateRoute();
+            
+            if (!this.props.disablePanel) {
+                this.createPanel();
+            }
+            
         });
     }
 
@@ -60,7 +64,8 @@ export default class GoogleMapsComponent extends React.Component {
         //CHANGE AND PUT YOUR STYLES
         let style = {
             width: window.innerWidth - 25,
-            height: window.innerHeight / 2 - 25
+            height: window.innerHeight / 2 - 30,
+            overflow: 'scroll'
         }
         return (
             <div>
