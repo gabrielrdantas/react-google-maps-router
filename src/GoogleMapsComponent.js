@@ -11,6 +11,7 @@ export default class GoogleMapsComponent extends React.Component {
         scriptjs('https:/maps.googleapis.com/maps/api/js?key=AIzaSyCRoz4R2eFrko_kqw0IaMy9uviycl4-BuI&sensor=false',
         () => {
             this.createMap();
+            this.createPanel();
             this.calculateRoute(); 
         });
     }
@@ -29,8 +30,11 @@ export default class GoogleMapsComponent extends React.Component {
 
         let map = new window.google.maps.Map(this.divMap, options);
         this.directionsDisplay.setMap(map);
-        this.directionsDisplay.setPanel(this.divDirectionsPanel)
 
+    }
+    
+    createPanel() {
+        this.directionsDisplay.setPanel(this.divDirectionsPanel);        
     }
     
     calculateRoute() {
