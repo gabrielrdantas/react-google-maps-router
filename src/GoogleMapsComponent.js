@@ -8,20 +8,21 @@ export default class GoogleMapsComponent extends React.Component {
     directionsDisplay;
 
     componentDidMount() {
-        scriptjs('https:/maps.googleapis.com/maps/api/js?key=YOUR_KEY&sensor=false',
+        scriptjs('https:/maps.googleapis.com/maps/api/js?key=AIzaSyCRoz4R2eFrko_kqw0IaMy9uviycl4-BuI&sensor=false',
         () => {
-            this.createMap();    
+            this.createMap();
+            this.calculateRoute(); 
         });
     }
 
     createMap() {
         
         this.directionsDisplay = new window.google.maps.DirectionsRenderer();
-        let latLongUser = new window.google.maps.LatLng(-22.969352, -43.427475);
+        let currentLatLong = new window.google.maps.LatLng(this.props.currentLatitude, this.props.currentLongitude);
 
         let options = {
             zoom: 13,
-            center: latLongUser,
+            center: currentLatLong,
             mapTypeControl: true,
             mapTypeId: window.google.maps.MapTypeId.ROADMAP
         };
@@ -30,13 +31,12 @@ export default class GoogleMapsComponent extends React.Component {
         this.directionsDisplay.setMap(map);
         this.directionsDisplay.setPanel(this.divDirectionsPanel)
 
-        this.calculateRoute();
     }
     
     calculateRoute() {
         let directionsService = new window.google.maps.DirectionsService();
-        let start = new window.google.maps.LatLng(-22.923049, -43.373979);
-        let end =  new window.google.maps.LatLng(-22.997345, -43.358052);
+        let start = new window.google.maps.LatLng(this.props.currentLatitude, this.props.currentLongitude);
+        let end =  new window.google.maps.LatLng(this.props.destinationLatitude, this.props.destinationLongitude);
 
         let request = {
             origin: start,
@@ -53,9 +53,10 @@ export default class GoogleMapsComponent extends React.Component {
     }
 
     render() {
+        //CHANGE AND PUT YOUR STYLES
         let style = {
-            width: window.innerWidth,
-            height: '500px'
+            width: window.innerWidth - 25,
+            height: window.innerHeight / 2 - 25
         }
         return (
             <div>
